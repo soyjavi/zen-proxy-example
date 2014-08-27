@@ -39,3 +39,11 @@ rules:
     hosts:
       - address : localhost
         port    : 1987
+
+  - name    : redirect
+    strategy: roundrobin
+    domain  : localhost
+    query   : /redirect
+    hosts:
+      - address : localhost
+        port    : 2001

@@ -2,13 +2,11 @@ var http = require('http');
 var hyperquest = require('hyperquest');
 
 /* -- Random NODEJS servers (from :1981 to :1990) --------------------------- */
-var delay, i, machines, port, _i;
-machines = [];
+var delay, i, port, _i;
 port = 1980;
 delay = 10;
 for (i = _i = 1; _i <= 10; i = ++_i) {
   port++;
-  machines.push("localhost:" + port);
   http.createServer(function(req, res) {
     setTimeout(function() {
       res.writeHead(200, {"Content-Type": "text/plain"});
@@ -18,16 +16,26 @@ for (i = _i = 1; _i <= 10; i = ++_i) {
   }).listen(port);
 }
 
+http.createServer(function(req, res) {
+setTimeout(function() {
+  res.writeHead(302, {
+    'Location': 'http://tapquo.com'
+  });
+  res.end();
+}, delay);
+}).listen(2001);
+
 /* -- Making calls ---------------------------------------------------------- */
 var interval_id = setInterval(function(){proxy();}, 2500);
 
+j = 0
 var proxy = function() {
-  for (var i = 0; i < 3; i++) {
-      hyperquest('http://localhost:8888/random');
-      hyperquest('http://127.0.0.1:8888/roundrobin');
-      hyperquest('http://localhost:8888/regex/prefix-' + i + '/hello-' + i);
-  };
+  j = (j < 3) ? (j + 1) : 0
+  hyperquest('http://localhost:8888/random');
+  hyperquest('http://127.0.0.1:8888/roundrobin');
+  hyperquest('http://localhost:8888/regex/prefix-' + j + '/hello-' + j);
   hyperquest('http://localhost:8888/unknown/url');
+  hyperquest('http://localhost:8888/redirect');
 };
 
 proxy();

@@ -14,7 +14,7 @@
     "email": "javi@tapquo.com"
   },
   "dependencies": {
-    "zenproxy"  : "*"
+    "zenproxy"  : "0.08.27"
   },
   "devDependencies": {
     "hyperquest" : "*"
