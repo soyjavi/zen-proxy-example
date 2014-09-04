@@ -47,3 +47,12 @@ rules:
     hosts:
       - address : localhost
         port    : 2001
+
+  - name      : subdomains
+    strategy  : roundrobin
+    domain    : my-domain.com
+    subdomain : "test"
+    query     : /
+    hosts:
+      - address : localhost
+        port    : 1337
