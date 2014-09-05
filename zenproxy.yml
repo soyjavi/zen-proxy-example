@@ -15,6 +15,15 @@ rules:
         port    : 1984
       - address : localhost
         port    : 1985
+    statics:
+      - url     : /css
+        folder  : ~/assets/stylesheets
+        maxage  : 60 #1 minute
+      - url     : /img
+        folder  : ~/assets/images
+        maxage  : 3600 #1 hour
+      - url     : /js
+        folder  : ~/assets/javascripts
 
   - name    : domain.com
     strategy: roundrobin
