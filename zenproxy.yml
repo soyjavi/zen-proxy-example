@@ -1,5 +1,15 @@
-port : 8888
+http : 8888
+https: 8889
 rules:
+  - name    : secure.com
+    https   : true
+    strategy: random
+    domain  : localhost
+    query   : /private
+    hosts   :
+      - address : localhost
+        port    : 1981
+
   - name    : sub.domain.com
     strategy: random
     domain  : localhost
@@ -20,7 +30,7 @@ rules:
         folder  : ~/assets/stylesheets
         maxage  : 60 #1 minute
       - url     : /img
-        folder  : ~/assets/images
+        folder  : /avatars
         maxage  : 3600 #1 hour
       - url     : /js
         folder  : ~/assets/javascripts
